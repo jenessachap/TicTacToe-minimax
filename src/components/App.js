@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.scss';
 
-// Box button component
+// gameboard button component
 const Box = ({ value, onClick }) => {
 
   return (
@@ -38,17 +38,14 @@ const checkWinner = (boxes) => {
     //check if any of the possible winning combinations exist.
     if (boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
       winning = boxes[a];
-      const winningButtons = winningLines[i]
     }
   }
-
   if (winning == null && isBoardFull(boxes)) {
     return 'tie'
   } else return winning;
 }
 
-
-
+//checks to see if no moves are available
 const isBoardFull = (boxes) => {
   for (let i = 0; i < boxes.length; i++) {
     if (boxes[i] == null) {
@@ -58,7 +55,7 @@ const isBoardFull = (boxes) => {
   return true;
 }
 
-//gameplay component
+//main gameplay component
 const Game = () => {
   const [boxes, setBoxes] = useState(Array(9).fill(null));
   const [isAiTurn, setIsAiTurn] = useState(false);
@@ -67,12 +64,13 @@ const Game = () => {
 
   const getStatus = () => {
     if (winner && winner !== "tie") {
-      return  "😢  You Lose!";
+      return "😢  You Lose!";
     } else if (isBoardFull(boxes)) {
       return "😏 Tie!";
     }
   }
 
+  //onclick for each button will assign the player's value to that game piece
   const renderBox = (boxNumber) => {
     return (
       <div className="box">
@@ -92,6 +90,7 @@ const Game = () => {
     );
   }
 
+  //used in the minimax algo to determine if the possible moves will result in a win, loss or tie.
   const possibleScores = {
     X: 1,
     O: -1,
@@ -108,10 +107,12 @@ const Game = () => {
       let score;
       for (let i = 0; i < boxes.length; i++) {
         if (boxes[i] == null) {
+          //breifly assume this box will be the ai's move
           const newBoxes = boxes.slice();
           newBoxes[i] = "X";
           setBoxes(newBoxes);
           score = minimax(newBoxes, depth + 1, false)
+          //reset the boxes to the previous state
           setBoxes(boxes);
           topScore = Math.max(score, topScore)
         }
@@ -122,11 +123,12 @@ const Game = () => {
       let score;
       for (let i = 0; i < boxes.length; i++) {
         if (boxes[i] == null) {
+          //breifly assume this box will be the ai's move
           const newBoxes = boxes.slice();
           newBoxes[i] = "O";
           setBoxes(newBoxes);
-
           score = minimax(newBoxes, depth + 1, true)
+          //reset the boxes to the previous state
           setBoxes(boxes);
           topScore = Math.min(score, topScore)
         }
@@ -162,6 +164,7 @@ const Game = () => {
           newBoxes[i] = "X";
           setBoxes(newBoxes);
           score = minimax(newBoxes, 0, false)
+          //reset the boxes to the previous state
           setBoxes(boxes);
           if (score > topScore) {
             topScore = score;
@@ -173,7 +176,7 @@ const Game = () => {
       setIsAiTurn(false)
       // to make the ai's turn feel a bit more realistic, wait to invoke the aiMove function 
       const wait = Math.floor(Math.random() * 1000)
-      setTimeout(function(){ aiMove(move)}, wait)
+      setTimeout(function () { aiMove(move) }, wait)
       // aiMove(move);
     }
   }
