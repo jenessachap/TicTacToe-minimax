@@ -56,7 +56,7 @@ const isBoardFull = (boxes) => {
 }
 
 //main gameplay component
-const Game = () => {
+const App = () => {
   const [boxes, setBoxes] = useState(Array(9).fill(null));
   const [isAiTurn, setIsAiTurn] = useState(false);
   const currentPlayer = isAiTurn ? "X" : "O";
@@ -229,4 +229,4 @@ const Game = () => {
   );
 }
 
-export default Game;
+export default App;
