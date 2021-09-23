@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 require('dotenv').config();
-const PORT = 3333;
+const PORT = process.env.PORT || 3333;
 app.use(express.static(__dirname + '/public'));
 
 app.get('/ping', (req, res) => {

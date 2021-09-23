@@ -12,7 +12,7 @@ Fork and clone this repo, navigate to the directory in your terminal and run the
 
 `npm install`
 
-`npm run build`
+`npm run webpack`
 
 `npm start` 
 
