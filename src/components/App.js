@@ -39,7 +39,6 @@ const checkWinner = (boxes) => {
     if (boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
       winning = boxes[a];
       const winningButtons = winningLines[i]
-      renderWin(boxes, winningButtons)
     }
   }
 
@@ -48,18 +47,7 @@ const checkWinner = (boxes) => {
   } else return winning;
 }
 
-const renderWin = (boxes, winningButtons) => {
-  const render3 = []
-  winningButtons.forEach(el => {
-    render3.push(<button className="win" value={boxes[el]} />)
-  })
 
-  return (
-    <div>
-      {render3}
-    </div>
-  )
-}
 
 const isBoardFull = (boxes) => {
   for (let i = 0; i < boxes.length; i++) {
