@@ -5,7 +5,7 @@ This Tic Tac Toe game is impossible to beat, why is that? Because the algorithm 
 
 This is achieved using [minimax](https://en.wikipedia.org/wiki/Minimax) which minimizes a possible loss by mapping out every move the opponent can make, and scoring each outcome, which ever outcome returns with the highest score, the artificial intelligence will chose that move for their turn.
 
-Test out the game here in the [demo](https://git.heroku.com/tictactoe-youcantwin.git)
+Test out the game here in the [demo](https://tictactoe-youcantwin.herokuapp.com/)
 
 <h2>Development</h2>
 Fork and clone this repo, navigate to the directory in your terminal and run the following
